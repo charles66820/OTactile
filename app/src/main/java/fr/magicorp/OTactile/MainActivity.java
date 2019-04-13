@@ -10,11 +10,18 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private Fragment productsFragment;
+    private Fragment prodileFragment;
+
+    private static final int PRODUCTFRAGMENT = 1;
+    private static final int PROFILEFRAGMENT = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,19 +62,36 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_products) {
-            // Handle the camera action
+            showFragment(PRODUCTFRAGMENT);
         } else if (id == R.id.nav_profile) {
-
+            showFragment(PROFILEFRAGMENT);
         } else if (id == R.id.nav_settings) {
-
+            showFragment(3);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void showFragment(int fragmentName) {
+        Fragment fragment = null;
+        switch (fragmentName) {
+            case PRODUCTFRAGMENT:
+                productsFragment = (productsFragment == null)? new ProductsFragment() : productsFragment;
+                fragment = productsFragment;
+            break;
+            case PROFILEFRAGMENT:
+                prodileFragment = (prodileFragment == null)? new ProfileFragment() : prodileFragment;
+                fragment = prodileFragment;
+                break;
+        }
+
+        if (fragment != null && !fragment.isVisible()){
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+        }
     }
 }
