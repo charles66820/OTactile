@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Fragment productsFragment;
-    private Fragment prodileFragment;
+    private Fragment profileFragment;
 
     private static final int PRODUCTFRAGMENT = 1;
     private static final int PROFILEFRAGMENT = 2;
@@ -95,8 +95,8 @@ public class MainActivity extends AppCompatActivity
                 fragment = productsFragment;
             break;
             case PROFILEFRAGMENT:
-                prodileFragment = (prodileFragment == null)? new ProfileFragment() : prodileFragment;
-                fragment = prodileFragment;
+                profileFragment = (profileFragment == null)? new ProfileFragment() : profileFragment;
+                fragment = profileFragment;
                 break;
         }
 
