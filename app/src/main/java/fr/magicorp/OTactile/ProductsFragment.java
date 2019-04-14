@@ -1,18 +1,17 @@
 package fr.magicorp.OTactile;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -27,22 +26,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ProductsFragment extends Fragment {
 
     ArrayList<Product> products;
     private GridView gv;
 
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
        View v = inflater.inflate(R.layout.fragment_products, container, false);
+
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         // init list
         products = new ArrayList<Product>();
@@ -69,8 +64,7 @@ public class ProductsFragment extends Fragment {
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(getContext());
-//        String url ="http://api.magicorp.fr/batrenis/v1/servers";
-        String url ="http://api.ppe3.net/products";
+        String url = pref.getString("api_server_host","") + "/products";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {

@@ -25,8 +25,8 @@
     <!-- Advance settings-->
     <string name="pref_header_advance">Advance</string>
 
-    <string name="pref_default_api_server_host">API server host</string>
-    <string name="pref_title_api_server_host">api.ppe.net</string>
+    <string name="pref_title_api_server_host">API server host</string>
+    <string name="pref_default_api_server_host">http://api.ppe.net</string>
 
     <!-- Other settings-->
     <string name="pref_header_order">Other</string>
