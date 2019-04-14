@@ -15,7 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.net.URL;
+import java.text.Format;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ProductsAdapter extends BaseAdapter {
     private final Context mContext;
@@ -71,7 +74,7 @@ public class ProductsAdapter extends BaseAdapter {
         }
         stars.setRating(product.getOpinionsAvg());
         title.setText(product.getTitle());
-        price.setText(Double.toString(product.getPriceTTC()));
+        price.setText(NumberFormat.getInstance(Locale.getDefault()).format(product.getPriceTTC())+"€");
 
         return convertView;
     }

@@ -33,7 +33,7 @@ public class Product {
         this.opinionsAvg = opinionsAvg;
     }
 
-    public Product(int id, String title, double priceTTC, int quantity, String mainPicture, String opinionAVG) {
+    public Product(int id, String title, double priceTTC, int quantity, String mainPicture, float opinionAVG) {
         this.id = id;
         this.title = title;
         this.priceTTC = priceTTC;
@@ -41,7 +41,7 @@ public class Product {
         this.quantity = quantity;
         this.description = null;
         this.mainPicture = mainPicture;
-        this.opinionsAvg = 0;
+        this.opinionsAvg = opinionAVG;
     }
 
     public int getId() {

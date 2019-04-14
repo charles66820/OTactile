@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="210dp"
         app:cardUseCompatPadding="true"
         app:cardElevation="4dp"
         app:cardCornerRadius="3dp" >
@@ -43,6 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="125dp"
+            android:textColor="@android:color/holo_red_dark"
             android:layout_marginTop="175dp"
             android:gravity="center_horizontal"
             android:textSize="12sp" />
