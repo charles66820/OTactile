@@ -80,5 +80,4 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
             bindPreferenceSummaryToValue(findPreference("api_server_host"));
         }
     }
-
 }

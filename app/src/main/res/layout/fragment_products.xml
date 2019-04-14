@@ -12,6 +12,7 @@
         android:gravity="center"
         android:columnWidth="@dimen/product_card"
         android:numColumns="auto_fit"
+        android:layout_gravity="center"
         android:verticalSpacing="10dp"
         android:stretchMode="spacingWidthUniform"
         android:layout_marginStart="8dp"

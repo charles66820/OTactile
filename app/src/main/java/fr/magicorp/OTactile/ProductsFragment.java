@@ -1,5 +1,6 @@
 package fr.magicorp.OTactile;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -56,7 +57,11 @@ public class ProductsFragment extends Fragment {
             public void onItemClick(AdapterView parent, View view, int position, long id) {
                 Product product = products.get(position);
 
-                Toast.makeText(getActivity(), "Product id : "+product.getId(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getContext(), ProductActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("productId", product.getId());
+                intent.putExtras(b);
+                startActivity(intent);
 
                 adapter.notifyDataSetChanged();
             }
