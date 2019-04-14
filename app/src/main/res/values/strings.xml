@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Ô\'Tactile</string>
 
+    <!-- Strings related to nav -->
     <string name="nav_products">Products</string>
     <string name="nav_profile">Profile</string>
     <string name="nav_settings">Settings</string>
@@ -8,5 +9,28 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <!-- Strings related to fragment -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_night_mode">Night mode</string>
+    <string name="pref_title_language">Change system language</string>
+
+    <!-- Advance settings-->
+    <string name="pref_header_advance">Advance</string>
+
+    <string name="pref_default_api_server_host">API server host</string>
+    <string name="pref_title_api_server_host">api.ppe.net</string>
+
+    <!-- Other settings-->
+    <string name="pref_header_order">Other</string>
+
+    <string name="pref_title_sys_night_mode">Allow system night mode</string>
+    <string name="pref_title_dev_settings">Dev settings</string>
+
 </resources>

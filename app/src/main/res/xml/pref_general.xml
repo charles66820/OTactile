@@ -1,0 +1,34 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/pref_header_general">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="night_mode"
+            android:title="@string/pref_title_night_mode" />
+
+        <Preference android:title="@string/pref_title_language">
+            <intent android:action="android.settings.LOCALE_SETTINGS" />
+        </Preference>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_header_advance">
+        <EditTextPreference
+            android:capitalize="words"
+            android:defaultValue="@string/pref_default_api_server_host"
+            android:inputType="textCapWords"
+            android:key="api_server_host"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/pref_title_api_server_host" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_header_order">
+
+        <Preference android:title="@string/pref_title_dev_settings">
+            <intent android:action="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
+        </Preference>
+    </PreferenceCategory>
+
+</PreferenceScreen>

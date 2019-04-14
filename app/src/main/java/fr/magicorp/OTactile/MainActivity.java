@@ -1,5 +1,7 @@
 package fr.magicorp.OTactile;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.navigation.NavigationView;
@@ -12,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
@@ -25,7 +28,13 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        if (pref.getBoolean("night_mode", false)) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
         // theme
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
             setTheme(R.style.DarkTheme_NoActionBar);
@@ -69,7 +78,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_profile) {
             showFragment(PROFILEFRAGMENT);
         } else if (id == R.id.nav_settings) {
-            showFragment(3);
+            Intent intent = new Intent(this, SettingsActivity.class); // instantiate Intent with an new activity
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
