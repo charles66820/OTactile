@@ -56,6 +56,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // select on start
+        navigationView.setCheckedItem(R.id.nav_products);
+        showFragment(PRODUCTFRAGMENT);
     }
 
     @Override
