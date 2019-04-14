@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment;
 
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
-import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

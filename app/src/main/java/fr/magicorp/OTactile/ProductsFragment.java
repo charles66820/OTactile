@@ -84,7 +84,7 @@ public class ProductsFragment extends Fragment {
                                         p.getString("title"),
                                         p.getDouble("priceTTC"),
                                         p.getInt("quantity"),
-                                        p.getString("mainPicture"),
+                                        (p.isNull("mainPicture"))?null:p.getString("mainPicture"),
                                         p.getString("opinionAVG"));
 
                                 products.add(product);

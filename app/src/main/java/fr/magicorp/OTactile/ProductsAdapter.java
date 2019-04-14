@@ -1,13 +1,18 @@
 package fr.magicorp.OTactile;
 
 import android.content.Context;
-import android.net.Uri;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -47,10 +52,24 @@ public class ProductsAdapter extends BaseAdapter {
         }
 
         final ImageView picture = (ImageView)convertView.findViewById(R.id.product_picture);
+        final RatingBar stars = (RatingBar)convertView.findViewById(R.id.stars);
         final TextView title = (TextView)convertView.findViewById(R.id.product_title);
         final TextView price = (TextView)convertView.findViewById(R.id.product_price);
-//"http://ppe3.net/img/products/"+product.getMainPicture()
-//        picture.setImageURI();
+
+        StrictMode.setThreadPolicy( new StrictMode.ThreadPolicy.Builder().permitAll().build()); // show error message and debug for api 25 and below
+        if (product.getMainPicture() == null) {
+            picture.setImageResource(R.drawable.default_product_img);
+        } else {
+            try {
+                URL url = new URL("http://ppe3.net/img/products/"+product.getMainPicture());
+                Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                picture.setImageBitmap(bmp);
+            } catch (Exception e) {
+                picture.setImageResource(R.drawable.default_product_img);
+                Log.e("MainActivity",e.toString());
+            }
+        }
+        stars.setRating(product.getOpinionsAvg());
         title.setText(product.getTitle());
         price.setText(Double.toString(product.getPriceTTC()));
 
