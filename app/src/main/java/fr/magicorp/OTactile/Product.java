@@ -10,27 +10,8 @@ public class Product {
     private String mainPicture;
     private float opinionsAvg;
 
-    public Product() { }
-
-    public Product(String title, double priceTTC, String reference, int quantity, String description, String mainPicture, float opinionsAvg) {
-        this.title = title;
-        this.priceTTC = priceTTC;
-        this.reference = reference;
-        this.quantity = quantity;
-        this.description = description;
-        this.mainPicture = mainPicture;
-        this.opinionsAvg = opinionsAvg;
-    }
-
-    public Product(int id, String title, Float priceTTC, String reference, int quantity, String description, String mainPicture, float opinionsAvg) {
+    public Product(int id) {
         this.id = id;
-        this.title = title;
-        this.priceTTC = priceTTC;
-        this.reference = reference;
-        this.quantity = quantity;
-        this.description = description;
-        this.mainPicture = mainPicture;
-        this.opinionsAvg = opinionsAvg;
     }
 
     public Product(int id, String title, double priceTTC, int quantity, String mainPicture, float opinionAVG) {
