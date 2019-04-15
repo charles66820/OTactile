@@ -28,6 +28,9 @@
     <string name="pref_title_api_server_host">API server host</string>
     <string name="pref_default_api_server_host">http://api.ppe.net</string>
 
+    <string name="pref_title_img_server_host">Image server host</string>
+    <string name="pref_default_img_server_host">http://ppe.net/img/</string>
+
     <!-- Other settings-->
     <string name="pref_header_order">Other</string>
 

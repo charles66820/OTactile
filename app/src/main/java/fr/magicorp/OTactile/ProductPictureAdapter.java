@@ -1,9 +1,11 @@
 package fr.magicorp.OTactile;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,10 +24,12 @@ import java.util.Locale;
 public class ProductPictureAdapter extends BaseAdapter {
     private final Context mContext;
     private final ArrayList<HashMap<String, String>> pictures;
+    final SharedPreferences pref;
 
     public ProductPictureAdapter(Context context, ArrayList<HashMap<String, String>>  pictures) {
         this.mContext = context;
         this.pictures = pictures;
+        this.pref = PreferenceManager.getDefaultSharedPreferences(mContext);
     }
 
     @Override
@@ -60,7 +64,7 @@ public class ProductPictureAdapter extends BaseAdapter {
             picture.setImageResource(R.drawable.default_product_img);
         } else {
             try {
-                URL url = new URL("http://ppe3.net/img/products/"+pic.get("fileName"));
+                URL url = new URL(pref.getString("imp_server_host","") + "/products/"+pic.get("fileName"));
                 Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                 picture.setImageBitmap(bmp);
             } catch (Exception e) {

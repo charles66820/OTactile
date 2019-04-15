@@ -78,6 +78,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
             addPreferencesFromResource(R.xml.pref_general);
             setHasOptionsMenu(true);
             bindPreferenceSummaryToValue(findPreference("api_server_host"));
+            bindPreferenceSummaryToValue(findPreference("img_server_host"));
         }
     }
 }

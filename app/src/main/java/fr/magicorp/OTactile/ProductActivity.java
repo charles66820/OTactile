@@ -44,7 +44,7 @@ public class ProductActivity extends AppCompatActivity {
 // Toast.makeText(getActivity(), "Product id : "+product.getId(), Toast.LENGTH_LONG).show();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         if (pref.getBoolean("night_mode", false)) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
@@ -74,7 +74,7 @@ public class ProductActivity extends AppCompatActivity {
             public void onItemClick(AdapterView parent, View view, int position, long id) {
                 HashMap<String, String> pic = picturesList.get(position);
                 try {
-                    URL url = new URL("http://ppe3.net/img/products/" + pic.get("fileName"));
+                    URL url = new URL(pref.getString("imp_server_host","") + "/products/" + pic.get("fileName"));
                     Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                     picture.setImageBitmap(bmp);
                 } catch (Exception e) {
@@ -115,7 +115,7 @@ public class ProductActivity extends AppCompatActivity {
                                 picture.setImageResource(R.drawable.default_product_img);
                             } else {
                                 try {
-                                    URL url = new URL("http://ppe3.net/img/products/" + pictures.getJSONObject(0).getString("fileName"));
+                                    URL url = new URL(pref.getString("imp_server_host","") + "/products/" + pictures.getJSONObject(0).getString("fileName"));
                                     Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                                     picture.setImageBitmap(bmp);
                                 } catch (Exception e) {
