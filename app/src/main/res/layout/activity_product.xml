@@ -103,8 +103,13 @@
 
         <GridView
             android:id="@+id/product_pictures"
+            android:columnWidth="100dp"
+            android:numColumns="auto_fit"
+            android:gravity="center"
+            android:scrollingCache="true"
             android:layout_width="0dp"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
+            android:maxHeight="150dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"

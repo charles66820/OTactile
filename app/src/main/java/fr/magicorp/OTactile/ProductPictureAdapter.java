@@ -16,20 +16,21 @@ import android.widget.TextView;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
-public class ProductsAdapter extends BaseAdapter {
+public class ProductPictureAdapter extends BaseAdapter {
     private final Context mContext;
-    private final ArrayList<Product> products;
+    private final ArrayList<HashMap<String, String>> pictures;
 
-    public ProductsAdapter(Context context, ArrayList<Product>  products) {
+    public ProductPictureAdapter(Context context, ArrayList<HashMap<String, String>>  pictures) {
         this.mContext = context;
-        this.products = products;
+        this.pictures = pictures;
     }
 
     @Override
     public int getCount() {
-        return products.size();
+        return pictures.size();
     }
 
     @Override
@@ -45,34 +46,28 @@ public class ProductsAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        final Product product = products.get(position);
+        final HashMap<String, String> pic = pictures.get(position);
 
         if (convertView == null) {
             final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
-            convertView = layoutInflater.inflate(R.layout.products_grid_item, null);
+            convertView = layoutInflater.inflate(R.layout.product_pictures_grid_item, null);
         }
 
-        final ImageView picture = (ImageView)convertView.findViewById(R.id.product_picture);
-        final RatingBar stars = (RatingBar)convertView.findViewById(R.id.stars);
-        final TextView title = (TextView)convertView.findViewById(R.id.product_title);
-        final TextView price = (TextView)convertView.findViewById(R.id.product_price);
+        final ImageView picture = (ImageView)convertView.findViewById(R.id.picture);
 
         StrictMode.setThreadPolicy( new StrictMode.ThreadPolicy.Builder().permitAll().build()); // show error message and debug for api 25 and below
-        if (product.getMainPicture() == null) {
+        if (pic.get("fileName") == null) {
             picture.setImageResource(R.drawable.default_product_img);
         } else {
             try {
-                URL url = new URL("http://ppe3.net/img/products/"+product.getMainPicture());
+                URL url = new URL("http://ppe3.net/img/products/"+pic.get("fileName"));
                 Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                 picture.setImageBitmap(bmp);
             } catch (Exception e) {
                 picture.setImageResource(R.drawable.default_product_img);
-                Log.e("MainActivity",e.toString());
+                Log.e("ProductPictureAdapter",e.toString());
             }
         }
-        stars.setRating(product.getOpinionsAvg());
-        title.setText(product.getTitle());
-        price.setText(NumberFormat.getInstance(Locale.getDefault()).format(product.getPriceTTC())+"€");
 
         return convertView;
     }
