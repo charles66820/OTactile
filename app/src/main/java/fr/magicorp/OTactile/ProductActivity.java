@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -23,6 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -72,7 +76,21 @@ public class ProductActivity extends AppCompatActivity {
                             quantity.setText(response.getString("quantity"));
                             stars.setRating((float)response.getDouble("opinionAVG"));
                             description.setText(response.getString("description"));
-                            picture.setImageResource(R.drawable.default_product_img);// (response.isNull("mainPicture"))?null:response.getString("mainPicture"),
+
+                            JSONArray pictures = response.getJSONArray("pictures");
+
+                            if (pictures.length() <= 0) {
+                                picture.setImageResource(R.drawable.default_product_img);
+                            } else {
+                                try {
+                                    URL url = new URL("http://ppe3.net/img/products/" + pictures.getJSONObject(0).getString("fileName"));
+                                    Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                                    picture.setImageBitmap(bmp);
+                                } catch (Exception e) {
+                                    picture.setImageResource(R.drawable.default_product_img);
+                                    Log.e("ProductActivity",e.toString());
+                                }
+                            }
 
                         } catch (final JSONException e) {
                             Toast.makeText(getApplicationContext(),
