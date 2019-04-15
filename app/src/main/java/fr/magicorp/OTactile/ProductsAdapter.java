@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.net.URL;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -62,18 +64,16 @@ public class ProductsAdapter extends BaseAdapter {
         final TextView price = (TextView)convertView.findViewById(R.id.product_price);
 
         StrictMode.setThreadPolicy( new StrictMode.ThreadPolicy.Builder().permitAll().build()); // show error message and debug for api 25 and below
-        if (product.getMainPicture() == null) {
-            picture.setImageResource(R.drawable.default_product_img);
-        } else {
-            try {
-                URL url = new URL( pref.getString("imp_server_host","") + "/products/"+product.getMainPicture());
-                Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                picture.setImageBitmap(bmp);
-            } catch (Exception e) {
-                picture.setImageResource(R.drawable.default_product_img);
-                Log.e("MainActivity",e.toString());
-            }
-        }
+
+        Picasso.get()
+                .load(pref.getString(
+                        "img_server_host",
+                        convertView.getResources().getString(R.string.pref_default_img_server_host)
+                        ) + "/products/" + product.getMainPicture()
+                )
+                .error(R.drawable.default_product_img)
+                .into(picture);
+
         stars.setRating(product.getOpinionsAvg());
         title.setText(product.getTitle());
         price.setText(NumberFormat.getInstance(Locale.getDefault()).format(product.getPriceTTC())+"€");

@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.net.URL;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -60,19 +62,15 @@ public class ProductPictureAdapter extends BaseAdapter {
         final ImageView picture = (ImageView)convertView.findViewById(R.id.picture);
 
         StrictMode.setThreadPolicy( new StrictMode.ThreadPolicy.Builder().permitAll().build()); // show error message and debug for api 25 and below
-        if (pic.get("fileName") == null) {
-            picture.setImageResource(R.drawable.default_product_img);
-        } else {
-            try {
-                URL url = new URL(pref.getString("imp_server_host","") + "/products/"+pic.get("fileName"));
-                Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                picture.setImageBitmap(bmp);
-            } catch (Exception e) {
-                picture.setImageResource(R.drawable.default_product_img);
-                Log.e("ProductPictureAdapter",e.toString());
-            }
-        }
 
+        Picasso.get()
+                .load(pref.getString(
+                        "img_server_host",
+                        convertView.getResources().getString(R.string.pref_default_img_server_host)
+                        ) + "/products/" + pic.get("fileName")
+                )
+                .error(R.drawable.default_product_img)
+                .into(picture);
         return convertView;
     }
 }

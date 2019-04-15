@@ -29,6 +29,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -73,20 +74,20 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
                 HashMap<String, String> pic = picturesList.get(position);
-                try {
-                    URL url = new URL(pref.getString("imp_server_host","") + "/products/" + pic.get("fileName"));
-                    Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                    picture.setImageBitmap(bmp);
-                } catch (Exception e) {
-                    picture.setImageResource(R.drawable.default_product_img);
-                    Log.e("ProductActivity",e.toString());
-                }
+                Picasso.get()
+                        .load(pref.getString(
+                                "img_server_host",
+                                getResources().getString(R.string.pref_default_img_server_host)
+                                ) + "/products/" + pic.get("fileName")
+                        )
+                        .error(R.drawable.default_product_img)
+                        .into(picture);
             }
         });
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = pref.getString("api_server_host","") + "/products/"
+        String url = pref.getString("api_server_host", getResources().getString(R.string.pref_default_api_server_host)) + "/products/"
                 +Integer.toString(getIntent().getExtras().getInt("productId"));
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
@@ -115,7 +116,7 @@ public class ProductActivity extends AppCompatActivity {
                                 picture.setImageResource(R.drawable.default_product_img);
                             } else {
                                 try {
-                                    URL url = new URL(pref.getString("imp_server_host","") + "/products/" + pictures.getJSONObject(0).getString("fileName"));
+                                    URL url = new URL(pref.getString("img_server_host", getResources().getString(R.string.pref_default_img_server_host)) + "/products/" + pictures.getJSONObject(0).getString("fileName"));
                                     Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                                     picture.setImageBitmap(bmp);
                                 } catch (Exception e) {

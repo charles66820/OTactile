@@ -64,7 +64,7 @@ public class ProductsFragment extends Fragment {
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String url = pref.getString("api_server_host","") + "/products";
+        String url = pref.getString("api_server_host", getResources().getString(R.string.pref_default_api_server_host)) + "/products";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
