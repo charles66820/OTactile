@@ -3,9 +3,11 @@ package fr.magicorp.OTactile;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -38,5 +40,13 @@ public class ProfileActivity extends AppCompatActivity {
             history_display_quantity.setText(""+(20+(i+1)));
             tableLayout.addView(tableRow);
         }
+    }
+
+    public void showOrders(View view) {
+        Intent intent = new Intent(this, OrdersActivity.class); // instantiate Intent with an new activity
+        Bundle b = new Bundle();
+        b.putInt("id", 1);
+        intent.putExtras(b);
+        startActivity(intent);
     }
 }

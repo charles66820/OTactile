@@ -14,6 +14,7 @@
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_product">Product info</string>
     <string name="title_activity_profile">Profile info</string>
+    <string name="title_activity_orders">Orders</string>
 
     <!-- Strings related to Settings -->
 
@@ -54,5 +55,10 @@
     <string name="address_header_postal_city">City</string>
 
     <string name="profile_button_show_orders">Show orders</string>
+
+    <!-- Strings related to profile -->
+
+    <!-- General info -->
+
 
 </resources>

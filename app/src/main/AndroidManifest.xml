@@ -15,13 +15,20 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".OrdersActivity"
+            android:label="@string/title_activity_profile"
+            android:parentActivityName=".ProfileActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fr.magicorp.OTactile.ProfileActivity" />
+        </activity>
+        <activity
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile"
             android:parentActivityName=".ProductActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="fr.magicorp.OTactile.MainActivity" />>
-
+                android:value="fr.magicorp.OTactile.ProductActivity" />
         </activity>
         <activity
             android:name=".ProductActivity"
