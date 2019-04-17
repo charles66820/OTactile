@@ -13,6 +13,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_product">Product info</string>
+    <string name="title_activity_profile">Profile info</string>
 
     <!-- Strings related to Settings -->
 
@@ -36,5 +37,22 @@
 
     <string name="pref_title_sys_night_mode">Allow system night mode</string>
     <string name="pref_title_dev_settings">Dev settings</string>
+
+    <!-- Strings related to profile -->
+
+    <!-- General info -->
+    <string name="profile_title_login">Login :</string>
+    <string name="profile_title_firstName">Firstname :</string>
+    <string name="profile_title_lastName">Lastname :</string>
+    <string name="profile_title_email">Email :</string>
+    <string name="profile_title_phone_number">Phone number :</string>
+
+    <!-- For table addresses -->
+    <string name="address_header_way">Way</string>
+    <string name="address_header_complement">Complement</string>
+    <string name="address_header_postal_code">Postal code</string>
+    <string name="address_header_postal_city">City</string>
+
+    <string name="profile_button_show_orders">Show orders</string>
 
 </resources>
