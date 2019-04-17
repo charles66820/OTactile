@@ -56,9 +56,18 @@
 
     <string name="profile_button_show_orders">Show orders</string>
 
-    <!-- Strings related to profile -->
+    <!-- Strings related to orders -->
 
-    <!-- General info -->
+    <!-- Order info -->
+    <string name="order_title_no">N° :</string>
+    <string name="order_title_total">Total :</string>
+    <string name="order_title_shipping">Shipping :</string>
+    <string name="order_title_delivery_address">Delivery address :</string>
 
+    <!-- ordered product info -->
+    <string name="order_title_title">Title :</string>
+    <string name="order_title_reference">Reference :</string>
+    <string name="order_title_price">Price :</string>
+    <string name="order_title_quantity">Quantity :</string>
 
 </resources>
