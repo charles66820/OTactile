@@ -29,22 +29,24 @@ import java.util.ArrayList;
 
 public class ProductsFragment extends Fragment {
 
-    ArrayList<Product> products;
+    private ArrayList<Product> products;
     private GridView gv;
+    private RequestQueue queue;
+    private JsonObjectRequest jsonObjectRequest;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
        View v = inflater.inflate(R.layout.fragment_products, container, false);
 
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(requireActivity());
 
         // init list
         products = new ArrayList<Product>();
         gv = (GridView) v.findViewById(R.id.list);
 
         // set adapter
-        final ProductsAdapter adapter = new ProductsAdapter(getContext(), products);
+        final ProductsAdapter adapter = new ProductsAdapter(getActivity(), products);
         gv.setAdapter(adapter);
 
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -52,21 +54,21 @@ public class ProductsFragment extends Fragment {
             public void onItemClick(AdapterView parent, View view, int position, long id) {
                 Product product = products.get(position);
 
-                Intent intent = new Intent(getContext(), ProductActivity.class);
+                Intent intent = new Intent(getActivity(), ProductActivity.class);
                 Bundle b = new Bundle();
                 b.putInt("productId", product.getId());
                 intent.putExtras(b);
                 startActivity(intent);
-
-                adapter.notifyDataSetChanged();
             }
         });
 
+        adapter.notifyDataSetChanged();
+
         // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(getContext());
+        queue = Volley.newRequestQueue(getActivity());
         String url = pref.getString("api_server_host", getResources().getString(R.string.pref_default_api_server_host)) + "/products";
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+        jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
                     @Override
@@ -90,7 +92,7 @@ public class ProductsFragment extends Fragment {
                             }
                             adapter.notifyDataSetChanged();
                         } catch (final JSONException e) {
-                            Toast.makeText(getContext(),
+                            Toast.makeText(getActivity(),
                                     "Json parsing error: " + e.getMessage(),
                                     Toast.LENGTH_LONG).show();
                         }
@@ -99,7 +101,7 @@ public class ProductsFragment extends Fragment {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(),
+                        Toast.makeText(getActivity(),
                                 "Http connexion error: " + error.getMessage(),
                                 Toast.LENGTH_LONG).show();
                     }
@@ -110,5 +112,12 @@ public class ProductsFragment extends Fragment {
             throw new RuntimeException(e);
         }
         return v;
+    }
+
+    @Override
+    public void onDestroyView() {
+        jsonObjectRequest.cancel();
+        queue.stop();
+        super.onDestroyView();
     }
 }
