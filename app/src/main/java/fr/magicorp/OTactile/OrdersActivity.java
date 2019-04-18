@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ExpandableListView;
 
 import java.util.ArrayList;
@@ -55,5 +56,15 @@ public class OrdersActivity extends AppCompatActivity {
         listHashOrderProducts.put(listDataOrder.get(1), ltest1);
         listHashOrderProducts.put(listDataOrder.get(2), ltest1);
         listHashOrderProducts.put(listDataOrder.get(3), ltest1);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

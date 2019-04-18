@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -120,6 +121,7 @@ public class ProfileActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(),
                                     "Json parsing error: " + e.getMessage(),
                                     Toast.LENGTH_LONG).show();
+                            finish();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -129,6 +131,7 @@ public class ProfileActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),
                                 "Http connexion error: " + error.getMessage(),
                                 Toast.LENGTH_LONG).show();
+                        finish();
                     }
                 });
         try {
@@ -193,7 +196,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void showOrders(View view) {
         Intent intent = new Intent(this, OrdersActivity.class); // instantiate Intent with an new activity
         Bundle b = new Bundle();
-        b.putInt("id", 1);
+        b.putInt("id", customer.getId());
         intent.putExtras(b);
         startActivity(intent);
     }
