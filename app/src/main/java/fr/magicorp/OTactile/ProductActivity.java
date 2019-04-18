@@ -42,10 +42,14 @@ import java.util.HashMap;
 import java.util.Locale;
 
 public class ProductActivity extends AppCompatActivity {
-// Toast.makeText(getActivity(), "Product id : "+product.getId(), Toast.LENGTH_LONG).show();
+    private ProductPictureAdapter adapter;
+    private ArrayList<HashMap<String, String>> picturesList;
+    private SharedPreferences pref;
+    private ImageView picture;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
         if (pref.getBoolean("night_mode", false)) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
@@ -63,10 +67,10 @@ public class ProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product);
 
         // product pictures list
-        final ImageView picture = (ImageView) findViewById(R.id.product_picture);
+        picture = (ImageView) findViewById(R.id.product_picture);
 
-        final ArrayList<HashMap<String, String>> picturesList = new ArrayList<>();
-        final ProductPictureAdapter adapter = new ProductPictureAdapter(getBaseContext(), picturesList);
+        picturesList = new ArrayList<>();
+        adapter = new ProductPictureAdapter(getBaseContext(), picturesList);
         GridView gv = (GridView) findViewById(R.id.product_pictures);
         gv.setAdapter(adapter);
 
@@ -85,6 +89,10 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
 
+        initData();
+    }
+
+    private void initData() {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = pref.getString("api_server_host", getResources().getString(R.string.pref_default_api_server_host)) + "/products/"
@@ -116,7 +124,10 @@ public class ProductActivity extends AppCompatActivity {
                                 picture.setImageResource(R.drawable.default_product_img);
                             } else {
                                 try {
-                                    URL url = new URL(pref.getString("img_server_host", getResources().getString(R.string.pref_default_img_server_host)) + "/products/" + pictures.getJSONObject(0).getString("fileName"));
+                                    URL url = new URL(
+                                            pref.getString("img_server_host",
+                                             getResources().getString(R.string.pref_default_img_server_host)
+                                        ) + "/products/" + pictures.getJSONObject(0).getString("fileName"));
                                     Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                                     picture.setImageBitmap(bmp);
                                 } catch (Exception e) {
