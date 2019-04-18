@@ -123,17 +123,14 @@ public class ProductActivity extends AppCompatActivity {
                             if (pictures.length() <= 0) {
                                 picture.setImageResource(R.drawable.default_product_img);
                             } else {
-                                try {
-                                    URL url = new URL(
-                                            pref.getString("img_server_host",
-                                             getResources().getString(R.string.pref_default_img_server_host)
-                                        ) + "/products/" + pictures.getJSONObject(0).getString("fileName"));
-                                    Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                                    picture.setImageBitmap(bmp);
-                                } catch (Exception e) {
-                                    picture.setImageResource(R.drawable.default_product_img);
-                                    Log.e("ProductActivity",e.toString());
-                                }
+                                Picasso.get()
+                                        .load(pref.getString(
+                                                "img_server_host",
+                                                getResources().getString(R.string.pref_default_img_server_host)
+                                                ) + "/products/" + pictures.getJSONObject(0).getString("fileName")
+                                        )
+                                        .error(R.drawable.default_product_img)
+                                        .into(picture);
                             }
 
                             for (int i=0; i < pictures.length(); i++) {

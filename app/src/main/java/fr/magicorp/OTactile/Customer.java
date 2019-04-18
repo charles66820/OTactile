@@ -46,7 +46,7 @@ public class Customer {
     }
 
     public String getLastName() {
-        return lastName;
+        return lastName==null? "N/a":lastName;
     }
 
     public void setLastName(String lastName) {
@@ -54,7 +54,7 @@ public class Customer {
     }
 
     public String getFirstName() {
-        return firstName;
+        return firstName==null? "N/a":firstName;
     }
 
     public void setFirstName(String firstName) {
@@ -62,7 +62,7 @@ public class Customer {
     }
 
     public String getPhoneNumber() {
-        return phoneNumber;
+        return phoneNumber==null? "N/a":phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {

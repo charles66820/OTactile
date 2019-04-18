@@ -47,6 +47,7 @@
     <string name="profile_title_lastName">Lastname :</string>
     <string name="profile_title_email">Email :</string>
     <string name="profile_title_phone_number">Phone number :</string>
+    <string name="profile_title_created_date">Created date :</string>
 
     <!-- For table addresses -->
     <string name="address_header_way">Way</string>
