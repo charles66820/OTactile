@@ -73,8 +73,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         TextView deliveryAddress = (TextView) convertView.findViewById(R.id.deliveryAddressOrder);
 
         no.setText(String.valueOf(order.getId()));
-        total.setText(String.valueOf(order.getTotal()));
-        shipping.setText(String.valueOf(order.getShipping()));
+        total.setText(NumberFormat.getInstance(Locale.getDefault()).format(order.getTotal())+"€");
+        shipping.setText(NumberFormat.getInstance(Locale.getDefault()).format(order.getShipping())+"€");
         deliveryAddress.setText(String.valueOf(order.getAddress()));
 
         return convertView;
