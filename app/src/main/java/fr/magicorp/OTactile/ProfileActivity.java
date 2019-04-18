@@ -43,7 +43,6 @@ import java.util.Locale;
 public class ProfileActivity extends AppCompatActivity {
 
     private TableLayout tableLayout;
-    private ProductPictureAdapter adapter;
     private SharedPreferences pref;
     private Customer customer;
     RequestQueue queue;
@@ -194,10 +193,12 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void showOrders(View view) {
-        Intent intent = new Intent(this, OrdersActivity.class); // instantiate Intent with an new activity
-        Bundle b = new Bundle();
-        b.putInt("id", customer.getId());
-        intent.putExtras(b);
-        startActivity(intent);
+        if (customer != null) {
+            Intent intent = new Intent(this, OrdersActivity.class); // instantiate Intent with an new activity
+            Bundle b = new Bundle();
+            b.putInt("id", customer.getId());
+            intent.putExtras(b);
+            startActivity(intent);
+        }
     }
 }

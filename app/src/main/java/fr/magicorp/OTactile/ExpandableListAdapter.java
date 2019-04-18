@@ -7,8 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private final Context mContext;
@@ -80,7 +82,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        final OrderProduct orderProduct = (OrderProduct)getChild(groupPosition,childPosition);
+        final OrderProduct orderProduct = (OrderProduct) getChild(groupPosition,childPosition);
 
         if (convertView == null) {
             LayoutInflater layoutInflater = LayoutInflater.from(mContext);
@@ -94,7 +96,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         title.setText(String.valueOf(orderProduct.getTitle()));
         reference.setText(String.valueOf(orderProduct.getReference()));
-        price.setText(String.valueOf(orderProduct.getPriceTTC()));
+        price.setText(NumberFormat.getInstance(Locale.getDefault()).format(orderProduct.getPriceTTC())+"€");
         quantity.setText(String.valueOf(orderProduct.getQuantity()));
 
         return convertView;
