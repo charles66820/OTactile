@@ -30,7 +30,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return listHashOrderProducts.size();
+        return listHashOrderProducts.get(listDataOrder.get(groupPosition)).size();
     }
 
     @Override
@@ -82,7 +82,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        final OrderProduct orderProduct = (OrderProduct) getChild(groupPosition,childPosition);
+        OrderProduct orderProduct = (OrderProduct) getChild(groupPosition,childPosition);
 
         if (convertView == null) {
             LayoutInflater layoutInflater = LayoutInflater.from(mContext);

@@ -3,9 +3,28 @@ package fr.magicorp.OTactile;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,13 +32,15 @@ import java.util.List;
 
 public class OrdersActivity extends AppCompatActivity {
     private ExpandableListView listView;
+    private SharedPreferences pref;
     private ExpandableListAdapter listAdapter;
     private List<Order> listDataOrder;
     private HashMap<Order,List<OrderProduct>> listHashOrderProducts;
+    RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
         // theme
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
             setTheme(R.style.DarkTheme);
@@ -31,31 +52,120 @@ public class OrdersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_orders);
 
         listView = (ExpandableListView) findViewById(R.id.orderExpList);
-        initData();
+        listDataOrder = new ArrayList<>();
+        listHashOrderProducts = new HashMap<>();
         listAdapter = new ExpandableListAdapter(this,listDataOrder, listHashOrderProducts);
         listView.setAdapter(listAdapter);
+        initData();
     }
 
     private void initData() {
-        listDataOrder = new ArrayList<>();
-        listHashOrderProducts = new HashMap<>();
 
-        listDataOrder.add(new Order(22314,40,20,"2, test truc et chose pour test, 66000 Perpignan",0));
-        listDataOrder.add(new Order(46545,10,10,"2, test truc et chose pour test1, 66000 Perpignan",0));
-        listDataOrder.add(new Order(4298,400,5,"2, test truc et chose pour test2, 66000 Perpignan",0));
-        listDataOrder.add(new Order(94956,50,42,"2, test truc et chose pour test3, 66000 Perpignan",0));
+        // Instantiate the RequestQueue.
+        queue = Volley.newRequestQueue(this);
 
-        List<OrderProduct> ltest1 = new ArrayList<>();
-        ltest1.add(new OrderProduct(0, "produit 1", "dzef efzfzef e", 21.54, 62));
-        ltest1.add(new OrderProduct(564, "produit 2", "dzef fere e", 245, 4545));
-        ltest1.add(new OrderProduct(5465, "produit 3", "dzef ef e", 345, 4));
-        ltest1.add(new OrderProduct(24, "produit 4", "dzef fe e", 5, 54));
-        ltest1.add(new OrderProduct(984, "produit 5", "dzef zefze e", 53, 7));
+        // get customer orders
+        String url = pref.getString(
+                "api_server_host",
+                getResources().getString(R.string.pref_default_api_server_host)) + "/customer/"
+                + String.valueOf(getIntent().getExtras().getInt("id")) + "/orders";
 
-        listHashOrderProducts.put(listDataOrder.get(0), ltest1);
-        listHashOrderProducts.put(listDataOrder.get(1), ltest1);
-        listHashOrderProducts.put(listDataOrder.get(2), ltest1);
-        listHashOrderProducts.put(listDataOrder.get(3), ltest1);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(final JSONObject response) {
+                        try {
+                            JSONArray orders = response.getJSONArray("orders");
+                            for (int i=0;i<orders.length();i++){
+                                JSONObject o = orders.getJSONObject(i);
+
+                                // get customer full order
+                                String url = pref.getString(
+                                        "api_server_host",
+                                        getResources().getString(R.string.pref_default_api_server_host)) + "/orders/"
+                                        + o.getInt("id");
+
+                                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                                        (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                                            @Override
+                                            public void onResponse(final JSONObject response) {
+                                                Order order;
+                                                List<OrderProduct> orderedProducts;
+                                                try {
+                                                    // order
+                                                    order = new Order(
+                                                            response.getInt("id"),
+                                                            response.getDouble("total"),
+                                                            response.getDouble("shipping"),
+                                                            response.getString("deliveryAddress"),
+                                                            response.getInt("status")
+                                                    );
+
+                                                    // ordered products
+                                                    orderedProducts = new ArrayList<>();
+                                                    JSONArray oPs = response.getJSONArray("orderedProducts");
+                                                    for (int j=0;j<oPs.length();j++){
+                                                        JSONObject oP = oPs.getJSONObject(j);
+
+                                                        orderedProducts.add(new OrderProduct(
+                                                                oP.getInt("id"),
+                                                                oP.getString("title"),
+                                                                oP.getString("reference"),
+                                                                oP.getDouble("priceTTC"),
+                                                                oP.getInt("quantity")));
+
+                                                    }
+                                                    if (!orderedProducts.isEmpty()) {
+                                                        listHashOrderProducts.put(order, orderedProducts);
+                                                    }
+
+                                                    listDataOrder.add(order);
+                                                    listAdapter.notifyDataSetChanged();
+                                                } catch (final JSONException e) {
+                                                    Toast.makeText(getApplicationContext(),
+                                                            "Json parsing error: " + e.getMessage(),
+                                                            Toast.LENGTH_LONG).show();
+                                                }
+                                            }
+                                        }, new Response.ErrorListener() {
+
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                Toast.makeText(getApplicationContext(),
+                                                        "Http connexion error: " + error.getMessage(),
+                                                        Toast.LENGTH_LONG).show();
+                                            }
+                                        });
+                                try {
+                                    queue.add(jsonObjectRequest);
+                                } catch (Exception e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                        } catch (final JSONException e) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Json parsing error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG).show();
+                            finish();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(),
+                                "Http connexion error: " + error.getMessage(),
+                                Toast.LENGTH_LONG).show();
+                        finish();
+                    }
+                });
+        try {
+            queue.add(jsonObjectRequest);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
