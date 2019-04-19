@@ -16,7 +16,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".OrdersActivity"
-            android:label="@string/title_activity_profile"
+            android:label="@string/title_activity_orders"
             android:parentActivityName=".ProfileActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -75,7 +75,7 @@
 
         <TextView
             android:id="@+id/priceOrderedProduct"
-            android:layout_width="40dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
@@ -96,7 +96,7 @@
 
         <TextView
             android:id="@+id/quantityOrderedProduct"
-            android:layout_width="20dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
