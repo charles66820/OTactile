@@ -26,10 +26,14 @@ public class MainActivity extends AppCompatActivity
     private static final int PRODUCTFRAGMENT = 1;
     private static final int PROFILEFRAGMENT = 2;
 
+    private SharedPreferences pref;
+    private boolean isDark;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        if (pref.getBoolean("night_mode", false)) {
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        isDark = pref.getBoolean("night_mode", false);
+        if (isDark) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -69,6 +73,14 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isDark != pref.getBoolean("night_mode", false)){
+            super.recreate();
         }
     }
 

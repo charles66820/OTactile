@@ -18,9 +18,6 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
         public boolean onPreferenceChange(Preference preference, Object value) {
             String stringValue = value.toString();
 
-            if (preference.getKey().equals("night_mode")) {
-                System.exit(2);
-            }
             preference.setSummary(stringValue);
 
             return true;
@@ -67,8 +64,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
+        super.onBackPressed();
     }
 
     public static class PrefsFragment extends PreferenceFragment {
