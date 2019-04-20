@@ -2,16 +2,15 @@ package fr.magicorp.OTactile;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import fr.magicorp.OTactile.entity.Order;
+import fr.magicorp.OTactile.entity.OrderProduct;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -20,7 +19,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,7 +29,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class OrdersActivity extends AppCompatActivity {
-    private ExpandableListView listView;
     private SharedPreferences pref;
     private ExpandableListAdapter listAdapter;
     private List<Order> listDataOrder;
@@ -51,7 +48,7 @@ public class OrdersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders);
 
-        listView = (ExpandableListView) findViewById(R.id.orderExpList);
+        ExpandableListView listView = findViewById(R.id.orderExpList);
         listDataOrder = new ArrayList<>();
         listHashOrderProducts = new HashMap<>();
         listAdapter = new ExpandableListAdapter(this,listDataOrder, listHashOrderProducts);
@@ -125,8 +122,9 @@ public class OrdersActivity extends AppCompatActivity {
                                                     listAdapter.notifyDataSetChanged();
                                                 } catch (final JSONException e) {
                                                     Toast.makeText(getApplicationContext(),
-                                                            "Json parsing error: " + e.getMessage(),
+                                                            R.string.error_server,
                                                             Toast.LENGTH_LONG).show();
+                                                    Log.e("OrdersActivity",e.getMessage());
                                                 }
                                             }
                                         }, new Response.ErrorListener() {
@@ -134,8 +132,9 @@ public class OrdersActivity extends AppCompatActivity {
                                             @Override
                                             public void onErrorResponse(VolleyError error) {
                                                 Toast.makeText(getApplicationContext(),
-                                                        "Http connexion error: " + error.getMessage(),
+                                                        R.string.error_network_connexion,
                                                         Toast.LENGTH_LONG).show();
+                                                Log.e("OrdersActivity",error.getMessage());
                                             }
                                         });
                                 try {
@@ -146,7 +145,7 @@ public class OrdersActivity extends AppCompatActivity {
                             }
                         } catch (final JSONException e) {
                             Toast.makeText(getApplicationContext(),
-                                    "Json parsing error: " + e.getMessage(),
+                                    R.string.error_server,
                                     Toast.LENGTH_LONG).show();
                             finish();
                         }
@@ -156,7 +155,7 @@ public class OrdersActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getApplicationContext(),
-                                "Http connexion error: " + error.getMessage(),
+                                R.string.error_server,
                                 Toast.LENGTH_LONG).show();
                         finish();
                     }

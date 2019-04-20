@@ -2,11 +2,8 @@ package fr.magicorp.OTactile;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,17 +14,18 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.net.URL;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import fr.magicorp.OTactile.entity.Product;
+
 public class ProductsAdapter extends BaseAdapter {
     private final Context mContext;
     private final ArrayList<Product> products;
-    final SharedPreferences pref;
+    private final SharedPreferences pref;
 
-    public ProductsAdapter(Context context, ArrayList<Product>  products) {
+    ProductsAdapter(Context context, ArrayList<Product> products) {
         this.mContext = context;
         this.products = products;
         this.pref = PreferenceManager.getDefaultSharedPreferences(mContext);
@@ -58,10 +56,10 @@ public class ProductsAdapter extends BaseAdapter {
             convertView = layoutInflater.inflate(R.layout.products_grid_item, null);
         }
 
-        final ImageView picture = (ImageView)convertView.findViewById(R.id.product_picture);
-        final RatingBar stars = (RatingBar)convertView.findViewById(R.id.stars);
-        final TextView title = (TextView)convertView.findViewById(R.id.product_title);
-        final TextView price = (TextView)convertView.findViewById(R.id.product_price);
+        final ImageView picture = convertView.findViewById(R.id.product_picture);
+        final RatingBar stars = convertView.findViewById(R.id.stars);
+        final TextView title = convertView.findViewById(R.id.product_title);
+        final TextView price = convertView.findViewById(R.id.product_price);
 
         StrictMode.setThreadPolicy( new StrictMode.ThreadPolicy.Builder().permitAll().build()); // show error message and debug for api 25 and below
 

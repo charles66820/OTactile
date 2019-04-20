@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -58,11 +59,11 @@ public class ProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product);
 
         // product pictures list
-        picture = (ImageView) findViewById(R.id.product_picture);
+        picture = findViewById(R.id.product_picture);
 
         picturesList = new ArrayList<>();
         adapter = new ProductPictureAdapter(getBaseContext(), picturesList);
-        GridView gv = (GridView) findViewById(R.id.product_pictures);
+        GridView gv = findViewById(R.id.product_pictures);
         gv.setAdapter(adapter);
 
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -95,12 +96,12 @@ public class ProductActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(final JSONObject response) {
                         try {
-                            TextView title = (TextView) findViewById(R.id.product_title);
-                            TextView price = (TextView) findViewById(R.id.product_price);
-                            TextView ref = (TextView) findViewById(R.id.product_reference);
-                            TextView quantity = (TextView) findViewById(R.id.product_quantity);
-                            RatingBar stars = (RatingBar) findViewById(R.id.product_stars);
-                            TextView description = (TextView) findViewById(R.id.product_reference);
+                            TextView title = findViewById(R.id.product_title);
+                            TextView price = findViewById(R.id.product_price);
+                            TextView ref = findViewById(R.id.product_reference);
+                            TextView quantity = findViewById(R.id.product_quantity);
+                            RatingBar stars = findViewById(R.id.product_stars);
+                            TextView description = findViewById(R.id.product_description);
 
                             title.setText(response.getString("title"));
                             price.setText(NumberFormat.getInstance(Locale.getDefault()).format(response.getDouble("priceTTC"))+"€");
@@ -134,8 +135,9 @@ public class ProductActivity extends AppCompatActivity {
 
                         } catch (final JSONException e) {
                             Toast.makeText(getApplicationContext(),
-                                    "Json parsing error: " + e.getMessage(),
+                                    R.string.error_server,
                                     Toast.LENGTH_LONG).show();
+                            Log.e("ProductActivity",e.getMessage());
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -143,8 +145,9 @@ public class ProductActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getApplicationContext(),
-                                "Http connexion error: " + error.getMessage(),
+                                R.string.error_network_connexion,
                                 Toast.LENGTH_LONG).show();
+                        Log.e("ProductActivity",error.getMessage());
                     }
                 });
         try {

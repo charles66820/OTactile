@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import fr.magicorp.OTactile.entity.Product;
 
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,20 +34,24 @@ import java.util.ArrayList;
 public class ProductsFragment extends Fragment {
 
     private ArrayList<Product> products;
-    private GridView gv;
     private RequestQueue queue;
     private JsonObjectRequest jsonObjectRequest;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
        View v = inflater.inflate(R.layout.fragment_products, container, false);
 
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(requireActivity());
 
         // init list
-        products = new ArrayList<Product>();
-        gv = (GridView) v.findViewById(R.id.list);
+        products = new ArrayList<>();
+        GridView gv = v.findViewById(R.id.list);
 
         // set adapter
         final ProductsAdapter adapter = new ProductsAdapter(getActivity(), products);
@@ -93,8 +101,9 @@ public class ProductsFragment extends Fragment {
                             adapter.notifyDataSetChanged();
                         } catch (final JSONException e) {
                             Toast.makeText(getActivity(),
-                                    "Json parsing error: " + e.getMessage(),
+                                    R.string.error_server,
                                     Toast.LENGTH_LONG).show();
+                            Log.e("ProductsFragment",e.getMessage());
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -102,8 +111,9 @@ public class ProductsFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getActivity(),
-                                "Http connexion error: " + error.getMessage(),
+                                R.string.error_network_connexion,
                                 Toast.LENGTH_LONG).show();
+                        Log.e("ProductsFragment",error.getMessage());
                     }
                 });
         try {

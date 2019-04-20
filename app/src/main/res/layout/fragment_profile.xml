@@ -20,7 +20,7 @@
         android:layout_marginEnd="100dp"
         android:layout_marginRight="100dp"
         android:ems="10"
-        android:hint="Enter your login"
+        android:hint="@string/profile_enter_login"
         android:inputType="textPersonName" />
 
     <Button
@@ -30,6 +30,6 @@
         android:layout_below="@id/login"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Load my profile" />
+        android:text="@string/profile_load_my_profile" />
 
 </RelativeLayout>

@@ -16,8 +16,8 @@
             android:layout_gravity="center"
             android:layout_weight="0.5"
             android:gravity="center_vertical|start"
-            android:paddingStart="10dp"
             android:paddingLeft="10dp"
+            android:paddingStart="10dp"
             android:textColor="@color/textWhite" />
 
         <TextView

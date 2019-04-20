@@ -17,6 +17,12 @@
     <string name="title_activity_orders">My orders</string>
     <string name="title_activity_barcode">Barcode</string>
 
+    <!-- errors and message -->
+    <string name="error_server">Communication error with the server</string>
+    <string name="error_network_connexion">Error with network connexion</string>
+    <string name="error_bad_authentication">Your login don\'t exist</string>
+    <string name="msg_quantity_success">Product quantity update with success</string>
+
     <!-- Strings related to barcode -->
 
     <!-- General product -->
@@ -33,6 +39,7 @@
     <string name="product_title_quantity">Quantity :</string>
     <string name="product_title_reference">Reference :</string>
     <string name="product_title_description">Description :</string>
+    <string name="product_default_image">product image</string>
 
     <!-- Strings related to Settings -->
 
@@ -62,6 +69,8 @@
     <string name="profile_title_email">Email :</string>
     <string name="profile_title_phone_number">Phone number :</string>
     <string name="profile_title_created_date">Created date :</string>
+    <string name="profile_enter_login">Enter your login</string>
+    <string name="profile_load_my_profile">Load my profile</string>
 
     <!-- For table addresses -->
     <string name="address_header_way">Way</string>

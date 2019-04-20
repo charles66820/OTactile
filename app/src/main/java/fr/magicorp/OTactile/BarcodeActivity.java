@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,8 +58,8 @@ public class BarcodeActivity extends AppCompatActivity {
         // Instantiate the RequestQueue.
         queue = Volley.newRequestQueue(this);
 
-        btnQuantity = (Button) findViewById(R.id.btnProductQuantity);
-        productQuantity = (EditText) findViewById(R.id.productQuantity);
+        btnQuantity = findViewById(R.id.btnProductQuantity);
+        productQuantity = findViewById(R.id.productQuantity);
 
         qrScan = new IntentIntegrator(this);
         qrScan.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
@@ -105,9 +105,9 @@ public class BarcodeActivity extends AppCompatActivity {
                         try {
                             productId = response.getInt("id");
 
-                            TextView title  = (TextView) findViewById(R.id.product_title);
-                            TextView ref  = (TextView) findViewById(R.id.product_reference);
-                            ImageView picture  = (ImageView) findViewById(R.id.product_first_picture);
+                            TextView title = findViewById(R.id.product_title);
+                            TextView ref = findViewById(R.id.product_description);
+                            ImageView picture = findViewById(R.id.product_first_picture);
 
                             title.setText(response.getString("title"));
                             ref.setText(response.getString("reference"));
@@ -130,8 +130,9 @@ public class BarcodeActivity extends AppCompatActivity {
 
                         } catch (final JSONException e) {
                             Toast.makeText(getApplicationContext(),
-                                    "Json parsing error: " + e.getMessage(),
+                                    R.string.error_server,
                                     Toast.LENGTH_LONG).show();
+                            Log.e("BarcodeActivity", e.getMessage());
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -139,8 +140,9 @@ public class BarcodeActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getApplicationContext(),
-                                "Http connexion error: " + error.getMessage(),
+                                R.string.error_network_connexion,
                                 Toast.LENGTH_LONG).show();
+                        Log.e("BarcodeActivity", error.getMessage());
                     }
                 });
         try {
@@ -168,7 +170,7 @@ public class BarcodeActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(final JSONObject response) {
                         Toast.makeText(getApplicationContext(),
-                                "tout vas bien",
+                                R.string.msg_quantity_success,
                                 Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
@@ -176,8 +178,9 @@ public class BarcodeActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getApplicationContext(),
-                                "Http connexion error: " + error.getMessage(),
+                                R.string.error_network_connexion,
                                 Toast.LENGTH_LONG).show();
+                        Log.e("BarcodeActivity", error.getMessage());
                     }
                 });
         try {

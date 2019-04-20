@@ -1,4 +1,4 @@
-package fr.magicorp.OTactile;
+package fr.magicorp.OTactile.entity;
 
 public class Customer {
     private int id;

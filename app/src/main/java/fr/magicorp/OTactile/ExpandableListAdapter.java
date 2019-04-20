@@ -12,12 +12,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import fr.magicorp.OTactile.entity.Order;
+import fr.magicorp.OTactile.entity.OrderProduct;
+
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private final Context mContext;
     private final List<Order> listDataOrder;
     private HashMap<Order,List<OrderProduct>> listHashOrderProducts;
 
-    public ExpandableListAdapter(Context mContext, List<Order> listDataOrder, HashMap<Order, List<OrderProduct>> listHashOrderProducts) {
+    ExpandableListAdapter(Context mContext, List<Order> listDataOrder, HashMap<Order, List<OrderProduct>> listHashOrderProducts) {
         this.mContext = mContext;
         this.listDataOrder = listDataOrder;
         this.listHashOrderProducts = listHashOrderProducts;
@@ -67,10 +70,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.order_list_item, null);
         }
 
-        TextView no = (TextView) convertView.findViewById(R.id.noOrder);
-        TextView total = (TextView) convertView.findViewById(R.id.totalOrder);
-        TextView shipping = (TextView) convertView.findViewById(R.id.shippingOrder);
-        TextView deliveryAddress = (TextView) convertView.findViewById(R.id.deliveryAddressOrder);
+        TextView no = convertView.findViewById(R.id.noOrder);
+        TextView total = convertView.findViewById(R.id.totalOrder);
+        TextView shipping = convertView.findViewById(R.id.shippingOrder);
+        TextView deliveryAddress = convertView.findViewById(R.id.deliveryAddressOrder);
 
         no.setText(String.valueOf(order.getId()));
         total.setText(NumberFormat.getInstance(Locale.getDefault()).format(order.getTotal())+"€");
@@ -89,10 +92,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.order_list_content_item, null);
         }
 
-        TextView title = (TextView) convertView.findViewById(R.id.titleOrderedProduct);
-        TextView reference = (TextView) convertView.findViewById(R.id.referenceOrderedProduct);
-        TextView price = (TextView) convertView.findViewById(R.id.priceOrderedProduct);
-        TextView quantity = (TextView) convertView.findViewById(R.id.quantityOrderedProduct);
+        TextView title = convertView.findViewById(R.id.titleOrderedProduct);
+        TextView reference = convertView.findViewById(R.id.referenceOrderedProduct);
+        TextView price = convertView.findViewById(R.id.priceOrderedProduct);
+        TextView quantity = convertView.findViewById(R.id.quantityOrderedProduct);
 
         title.setText(String.valueOf(orderProduct.getTitle()));
         reference.setText(String.valueOf(orderProduct.getReference()));

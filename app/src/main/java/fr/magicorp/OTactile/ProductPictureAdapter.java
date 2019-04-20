@@ -2,33 +2,25 @@ package fr.magicorp.OTactile;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.RatingBar;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.net.URL;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 
 public class ProductPictureAdapter extends BaseAdapter {
     private final Context mContext;
     private final ArrayList<HashMap<String, String>> pictures;
-    final SharedPreferences pref;
+    private final SharedPreferences pref;
 
-    public ProductPictureAdapter(Context context, ArrayList<HashMap<String, String>>  pictures) {
+    ProductPictureAdapter(Context context, ArrayList<HashMap<String, String>> pictures) {
         this.mContext = context;
         this.pictures = pictures;
         this.pref = PreferenceManager.getDefaultSharedPreferences(mContext);
@@ -59,7 +51,7 @@ public class ProductPictureAdapter extends BaseAdapter {
             convertView = layoutInflater.inflate(R.layout.product_pictures_grid_item, null);
         }
 
-        final ImageView picture = (ImageView)convertView.findViewById(R.id.picture);
+        final ImageView picture = convertView.findViewById(R.id.picture);
 
         StrictMode.setThreadPolicy( new StrictMode.ThreadPolicy.Builder().permitAll().build()); // show error message and debug for api 25 and below
 
