@@ -34,7 +34,7 @@
             android:title="@string/pref_title_img_server_host" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_header_order">
+    <PreferenceCategory android:title="@string/pref_header_other">
 
         <Preference android:title="@string/pref_title_dev_settings">
             <intent android:action="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />

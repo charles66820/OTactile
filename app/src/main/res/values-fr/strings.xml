@@ -28,7 +28,7 @@
     <string name="pref_title_img_server_host">Host du serveur d\'images</string>
     <string name="pref_title_dev_settings">Paramètres développeur</string>
     <string name="pref_title_api_server_host">Host du serveur d\'api</string>
-    <string name="pref_header_order">Commande</string>
+    <string name="pref_header_other">Autre</string>
     <string name="pref_header_general">Général</string>
     <string name="pref_header_advance">Avancer</string>
     <string name="pref_default_img_server_host">https://ppe3.magicorp.fr/img</string>
