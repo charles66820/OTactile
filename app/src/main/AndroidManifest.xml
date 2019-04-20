@@ -15,6 +15,14 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".BarcodeActivity"
+            android:label="@string/title_activity_barcode"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fr.magicorp.OTactile.MainActivity" />
+        </activity>
+        <activity
             android:name=".OrdersActivity"
             android:label="@string/title_activity_orders"
             android:parentActivityName=".ProfileActivity">

@@ -93,6 +93,9 @@ public class MainActivity extends AppCompatActivity
             showFragment(PRODUCTFRAGMENT);
         } else if (id == R.id.nav_profile) {
             showFragment(PROFILEFRAGMENT);
+        } else if (id == R.id.nav_barcode) {
+            Intent intent = new Intent(this, BarcodeActivity.class); // instantiate Intent with an new activity
+            startActivity(intent);
         } else if (id == R.id.nav_settings) {
             Intent intent = new Intent(this, SettingsActivity.class); // instantiate Intent with an new activity
             startActivity(intent);

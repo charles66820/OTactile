@@ -18,6 +18,10 @@
 
     <group android:id="@+id/nav_other">
         <item
+            android:id="@+id/nav_barcode"
+            android:icon="@drawable/ic_menu_barcode_scan"
+            android:title="@string/nav_barcode" />
+        <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_menu_settings"
             android:title="@string/nav_settings" />
