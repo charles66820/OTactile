@@ -29,4 +29,13 @@
         android:stretchMode="spacingWidthUniform"
         android:verticalSpacing="10dp" />
 
+    <TextView
+        android:id="@+id/emptyProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/list"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="64dp"
+        android:text="@string/products_not_found" />
+
 </RelativeLayout>

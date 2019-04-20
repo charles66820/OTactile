@@ -93,5 +93,6 @@
     <string name="order_title_reference">Reference :</string>
     <string name="order_title_price">Price :</string>
     <string name="order_title_quantity">Quantity :</string>
+    <string name="products_not_found">Products not found</string>
 
 </resources>
