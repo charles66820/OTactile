@@ -23,6 +23,7 @@
     <string name="barcode_btn_update_quantity">Update quantity</string>
     <string name="barcode_btn_scan_barcode">Scan barcode</string>
     <string name="barcode_product_quantity">Product quantity</string>
+    <string name="barcode_product_scan_barcode">Scan product barcode</string>
 
     <!-- Strings related to product -->
 

@@ -17,6 +17,8 @@
         <activity
             android:name=".BarcodeActivity"
             android:label="@string/title_activity_barcode"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="stateHidden"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

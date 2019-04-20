@@ -11,7 +11,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/product_description"
+            android:id="@+id/product_reference"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -20,20 +20,20 @@
             android:layout_marginRight="8dp"
             android:ems="10"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblProductDescription" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/lblProductReference"
+            app:layout_constraintTop_toTopOf="@+id/lblProductReference" />
 
         <TextView
-            android:id="@+id/lblProductDescription"
+            android:id="@+id/lblProductReference"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
-            android:text="@string/product_title_description"
+            android:text="@string/product_title_reference"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/product_picture2" />
+            app:layout_constraintTop_toBottomOf="@+id/product_first_picture" />
 
         <TextView
             android:id="@+id/lblProductQuantity"
@@ -58,7 +58,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/product_picture2"
+            android:id="@+id/product_first_picture"
             android:layout_width="0dp"
             android:layout_height="150dp"
             android:layout_marginTop="16dp"
@@ -75,6 +75,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:enabled="false"
+            android:onClick="changeQuantity"
             android:text="@string/barcode_btn_update_quantity"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -95,7 +96,7 @@
             android:inputType="number"
             app:layout_constraintEnd_toStartOf="@+id/btnProductQuantity"
             app:layout_constraintStart_toEndOf="@+id/lblProductQuantity"
-            app:layout_constraintTop_toBottomOf="@+id/product_description" />
+            app:layout_constraintTop_toBottomOf="@+id/product_reference" />
 
         <Button
             android:id="@+id/btnLoadProductWithBarcode"
@@ -107,10 +108,12 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
+            android:onClick="scanBarcode"
             android:text="@string/barcode_btn_scan_barcode"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/productQuantity" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
