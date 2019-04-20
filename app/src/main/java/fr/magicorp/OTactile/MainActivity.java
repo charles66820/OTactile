@@ -1,5 +1,6 @@
 package fr.magicorp.OTactile;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity
             showFragment(PROFILEFRAGMENT);
         } else if (id == R.id.nav_barcode) {
             Intent intent = new Intent(this, BarcodeActivity.class); // instantiate Intent with an new activity
-            startActivity(intent);
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
         } else if (id == R.id.nav_settings) {
             Intent intent = new Intent(this, SettingsActivity.class); // instantiate Intent with an new activity
             startActivity(intent);
