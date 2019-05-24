@@ -26,6 +26,8 @@
     <!-- Strings related to barcode -->
 
     <string name="barcode_result_not_found">Result Not Found</string>
+    <string name="barcode_not_found">No product matches this barcode</string>
+
     <!-- General product -->
     <string name="barcode_btn_update_quantity">Update quantity</string>
     <string name="barcode_btn_scan_barcode">Scan barcode</string>

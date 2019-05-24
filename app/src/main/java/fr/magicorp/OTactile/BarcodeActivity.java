@@ -140,9 +140,9 @@ public class BarcodeActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getApplicationContext(),
-                                R.string.error_network_connexion,
+                                R.string.barcode_not_found,
                                 Toast.LENGTH_LONG).show();
-                        Log.e("BarcodeActivity", error.getMessage());
+                        Log.e("BarcodeActivity","toto"+error.getMessage());
                     }
                 });
         try {
