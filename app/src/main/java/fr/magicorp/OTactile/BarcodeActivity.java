@@ -78,8 +78,8 @@ public class BarcodeActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
-            if (result.getContents() == null) {
-                Toast.makeText(this, "Result Not Found", Toast.LENGTH_LONG).show();
+            if (result.getContents().isEmpty()) {
+                Toast.makeText(this, R.string.barcode_result_not_found, Toast.LENGTH_LONG).show();
             } else {
                 productQuantity.setEnabled(true);
                 btnQuantity.setEnabled(true);

@@ -59,4 +59,6 @@
     <string name="address_header_postal_code">Code postal</string>
     <string name="address_header_postal_city">Ville</string>
     <string name="address_header_complement">Complément d\'adresse</string>
+    <string name="barcode_result_not_found">Résultats manquants</string>
+    <string name="order_not_found">Aucune commandes trouver</string>
 </resources>

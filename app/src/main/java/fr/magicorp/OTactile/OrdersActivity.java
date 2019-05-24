@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
@@ -119,6 +120,9 @@ public class OrdersActivity extends AppCompatActivity {
                                                     }
 
                                                     listDataOrder.add(order);
+
+                                                    (findViewById(R.id.emptyOrders)).setVisibility(View.INVISIBLE);
+
                                                     listAdapter.notifyDataSetChanged();
                                                 } catch (final JSONException e) {
                                                     Toast.makeText(getApplicationContext(),

@@ -109,7 +109,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                         } catch (final JSONException e) {
                             Toast.makeText(getApplicationContext(),
-                                    R.string.error_bad_authentication,
+                                    R.string.error_server,
                                     Toast.LENGTH_LONG).show();
                             finish();
                         }
@@ -119,7 +119,7 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getApplicationContext(),
-                                R.string.error_network_connexion,
+                                R.string.error_bad_authentication,
                                 Toast.LENGTH_LONG).show();
                         finish();
                     }

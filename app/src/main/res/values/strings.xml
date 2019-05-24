@@ -25,6 +25,7 @@
 
     <!-- Strings related to barcode -->
 
+    <string name="barcode_result_not_found">Result Not Found</string>
     <!-- General product -->
     <string name="barcode_btn_update_quantity">Update quantity</string>
     <string name="barcode_btn_scan_barcode">Scan barcode</string>
@@ -81,6 +82,7 @@
     <string name="profile_button_show_orders">Show orders</string>
 
     <!-- Strings related to orders -->
+    <string name="order_not_found">Order not found</string>
 
     <!-- Order info -->
     <string name="order_title_no">N° :</string>
