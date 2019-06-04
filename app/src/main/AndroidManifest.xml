@@ -49,6 +49,14 @@
                 android:value="fr.magicorp.OTactile.MainActivity" />
         </activity>
         <activity
+            android:name=".ListActivity"
+            android:label="List"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fr.magicorp.OTactile.MainActivity" />
+        </activity>
+        <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".MainActivity">
