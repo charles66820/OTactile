@@ -137,7 +137,7 @@ public class ProductActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(),
                                     R.string.error_server,
                                     Toast.LENGTH_LONG).show();
-                            Log.e("ProductActivity",e.getMessage());
+                            //Log.e("ProductActivity",e.getMessage());
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -147,7 +147,7 @@ public class ProductActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),
                                 R.string.error_network_connexion,
                                 Toast.LENGTH_LONG).show();
-                        Log.e("ProductActivity",error.getMessage());
+                        //Log.e("ProductActivity",error.getMessage());
                     }
                 });
         try {

@@ -128,7 +128,7 @@ public class OrdersActivity extends AppCompatActivity {
                                                     Toast.makeText(getApplicationContext(),
                                                             R.string.error_server,
                                                             Toast.LENGTH_LONG).show();
-                                                    Log.e("OrdersActivity",e.getMessage());
+                                                    //Log.e("OrdersActivity",e.getMessage());
                                                 }
                                             }
                                         }, new Response.ErrorListener() {
@@ -138,7 +138,7 @@ public class OrdersActivity extends AppCompatActivity {
                                                 Toast.makeText(getApplicationContext(),
                                                         R.string.error_network_connexion,
                                                         Toast.LENGTH_LONG).show();
-                                                Log.e("OrdersActivity",error.getMessage());
+                                                //Log.e("OrdersActivity",error.getMessage());
                                             }
                                         });
                                 try {

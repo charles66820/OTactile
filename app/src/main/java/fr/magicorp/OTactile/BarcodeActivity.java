@@ -132,7 +132,7 @@ public class BarcodeActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(),
                                     R.string.error_server,
                                     Toast.LENGTH_LONG).show();
-                            Log.e("BarcodeActivity", e.getMessage());
+                            //Log.e("BarcodeActivity", e.getMessage());
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -142,7 +142,7 @@ public class BarcodeActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),
                                 R.string.barcode_not_found,
                                 Toast.LENGTH_LONG).show();
-                        Log.e("BarcodeActivity","toto"+error.getMessage());
+                        //Log.e("BarcodeActivity","toto"+error.getMessage());
                     }
                 });
         try {
@@ -180,7 +180,7 @@ public class BarcodeActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),
                                 R.string.error_network_connexion,
                                 Toast.LENGTH_LONG).show();
-                        Log.e("BarcodeActivity", error.getMessage());
+                        //Log.e("BarcodeActivity", error.getMessage());
                     }
                 });
         try {

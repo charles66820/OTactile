@@ -162,14 +162,14 @@ public class ProfileActivity extends AppCompatActivity {
                             }
 
                         } catch (final JSONException e) {
-                            Log.e("ProfileActivity", e.getMessage());
+                            //Log.e("ProfileActivity", e.getMessage());
                         }
                     }
                 }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("ProfileActivity", error.getMessage());
+                        //Log.e("ProfileActivity", error.getMessage());
                     }
                 });
         try {

@@ -106,7 +106,7 @@ public class ProductsFragment extends Fragment {
                             Toast.makeText(getActivity(),
                                     R.string.error_server,
                                     Toast.LENGTH_LONG).show();
-                            Log.e("ProductsFragment",e.getMessage());
+                            //Log.e("ProductsFragment",e.getMessage());
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -116,7 +116,7 @@ public class ProductsFragment extends Fragment {
                         Toast.makeText(getActivity(),
                                 R.string.error_network_connexion,
                                 Toast.LENGTH_LONG).show();
-                        Log.e("ProductsFragment",error.getMessage());
+                        //Log.e("ProductsFragment",error.getMessage());
                     }
                 });
         try {
