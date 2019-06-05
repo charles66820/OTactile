@@ -98,5 +98,7 @@
     <string name="order_title_price">Price :</string>
     <string name="order_title_quantity">Quantity :</string>
     <string name="products_not_found">Products not found</string>
+    <string name="title_activity_stats">stats</string>
+    <string name="stats">stats</string>
 
 </resources>
