@@ -67,8 +67,12 @@ public class statsActivity extends AppCompatActivity {
                             TextView nbClients = findViewById(R.id.nbClients);
                             TextView nbClientOrdered = findViewById(R.id.nbClientOrdered);
 
-
-                            nbOrders.setText((response.getInt("nbOrders"));
+                            date.setText(response.getString("date"));
+                            nbOrders.setText(response.getString("nbOrders"));
+                            totalTTC.setText(response.getString("totalOrdersTTC"));
+                            avgCoust.setText(response.getString("avgOrders"));
+                            nbClients.setText(response.getString("nbCustomers"));
+                            nbClientOrdered.setText(response.getString("nbCustomersOrdered"));
 
                         } catch (final JSONException e) {
                             Toast.makeText(getApplicationContext(),
